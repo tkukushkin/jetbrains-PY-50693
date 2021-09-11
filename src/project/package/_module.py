@@ -5,7 +5,7 @@ _RequestT = TypeVar('_RequestT')
 _ResponseT = TypeVar('_ResponseT')
 
 
-class Client(Generic[_RequestT, _ResponseT]):
+class AsyncClient(Generic[_RequestT, _ResponseT]):
 
     def __init__(self, request_type: Type[_RequestT], response_type: Type[_ResponseT]):
         pass
@@ -13,5 +13,18 @@ class Client(Generic[_RequestT, _ResponseT]):
     async def __call__(self, request: _RequestT) -> _ResponseT:
         raise NotImplementedError()
 
+    async def call(self, request: _RequestT) -> _ResponseT:  # other methods OK
+        raise NotImplementedError()
 
-foo = Client(int, str)
+
+class SyncClient(Generic[_RequestT, _ResponseT]):
+
+    def __init__(self, request_type: Type[_RequestT], response_type: Type[_ResponseT]):
+        pass
+
+    def __call__(self, request: _RequestT) -> _ResponseT:
+        raise NotImplementedError()
+
+
+foo_async = AsyncClient(int, str)
+foo_sync = SyncClient(int, str)

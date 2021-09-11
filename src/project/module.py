@@ -17,6 +17,12 @@ class AsyncClient(Generic[_RequestT, _ResponseT]):
         raise NotImplementedError()
 
 
+class AsyncClientWithoutGenerics:
+
+    async def __call__(self, request: int) -> str:
+        raise NotImplementedError()
+
+
 class SyncClient(Generic[_RequestT, _ResponseT]):
 
     def __init__(self, request_type: Type[_RequestT], response_type: Type[_ResponseT]):
@@ -28,3 +34,4 @@ class SyncClient(Generic[_RequestT, _ResponseT]):
 
 foo_async = AsyncClient(int, str)
 foo_sync = SyncClient(int, str)
+foo_without_generics = AsyncClientWithoutGenerics()

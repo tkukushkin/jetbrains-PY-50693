@@ -1,5 +1,5 @@
 from project import module
-from project.module import foo_async, foo_sync
+from project.module import foo_async, foo_sync, foo_without_generics
 
 
 async def main() -> None:
@@ -13,3 +13,6 @@ async def main() -> None:
 
     res7 = foo_sync(1)  # OK
     res8 = module.foo_sync(1)  # NOT OK
+
+    res9 = await foo_without_generics(1)  # OK
+    res10 = await module.foo_without_generics(1)  # OK
